@@ -7,7 +7,7 @@ export default class RecipeController{
   public async create(request:Request,response:Response):Promise<Response>{
     console.log(request.body)
     const {name,method,image_url,ingredients,equipaments} = request.body
-    
+
       const createRecipe = new CreateRecipeService
 
       const recipe = await createRecipe.execute({name,method,image_url,ingredients,equipaments})

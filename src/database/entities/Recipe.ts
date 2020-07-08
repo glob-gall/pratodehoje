@@ -7,25 +7,30 @@ import {
 } from 'typeorm'
 
 @Entity()
-class Recipe{
-
+class Recipe {
   @PrimaryGeneratedColumn('uuid')
-  id:string
-  
+  id: string
+
   @Column()
-  name:string
+  name: string
+
   @Column()
-  method:string
+  method: string
+
   @Column()
-  image_url:string
+  image_url: string
+
   @Column()
-  ingredients:string
+  ingredients: string
+
   @Column()
-  equipaments:string
+  equipaments: string
+
   @CreateDateColumn()
-  created_at:Date
+  created_at: Date
+
   @UpdateDateColumn()
-  updated_at:Date
+  updated_at: Date
 }
 
 export default Recipe
