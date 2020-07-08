@@ -11,11 +11,6 @@
 
     "strictPropertyInitialization": false,
   "baseUrl": "./src",
-    // "paths": {
-    //   "@modules/*":["modules/*"],
-    //   "@config/*":["config/*"],
-    //   "@shared/*":["shared/*"]
-    // },
   "esModuleInterop": true,
 
 
@@ -24,6 +19,6 @@
 
 
     "forceConsistentCasingInFileNames": true,
-    "lib": [ "es2015" ]
+    "lib": [ "es2015" ],
   }
 }
