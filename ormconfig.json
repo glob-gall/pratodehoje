@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "docker",
+  "database": "pratodehoje",
+  "entities":[
+    "./src/entities/*.ts"
+  ],
+  "migrations":[
+    "./src/typeorm/migrations/*.ts"
+  ],
+  "cli":{
+    "migrationsDir":"./src/typeorm/migrations"
+  }
+}
