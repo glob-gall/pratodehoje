@@ -1,7 +1,9 @@
 import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
-import AppError from './database/Errors/AppError'
+import 'express-async-errors'
+
 import routes from './http/routes'
+import AppError from './database/errors/AppError'
 
 const app = express()
 
