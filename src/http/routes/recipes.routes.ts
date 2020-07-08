@@ -1,11 +1,10 @@
-import {Router,Request,Response} from 'express'
+import {Router} from 'express'
+import RecipeController from '../Controllers/RecipesController'
 
 const recipesRoutes = Router()
+const recipeController = new RecipeController
 
-recipesRoutes.get('/',(request:Request,response:Response)=>{
-  return response.json({
-    get:'get'
-  })
-})
+recipesRoutes.post('/',recipeController.create)
+recipesRoutes.get('/',recipeController.read)
 
 export default recipesRoutes

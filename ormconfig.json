@@ -9,9 +9,9 @@
     "./src/entities/*.ts"
   ],
   "migrations":[
-    "./src/typeorm/migrations/*.ts"
+    "./src/database/migrations/*.ts"
   ],
   "cli":{
-    "migrationsDir":"./src/typeorm/migrations"
+    "migrationsDir":"./src/database/migrations"
   }
 }

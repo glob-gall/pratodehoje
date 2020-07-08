@@ -1,6 +1,6 @@
-import RecipesRepository from '../typeorm/repositories/RecipesReposiotry'
-import Recipe from '../typeorm/entities/Recipe'
-import IRecipesRepository from '../typeorm/repositories/IRecipesRepository'
+import RecipesRepository from '../database/repositories/RecipesReposiotry'
+import Recipe from '../database/entities/Recipe'
+import IRecipesRepository from '../database/repositories/IRecipesRepository'
 
 class FindRecipeService{
   private recipesRepository: IRecipesRepository

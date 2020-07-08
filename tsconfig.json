@@ -11,11 +11,11 @@
 
     "strictPropertyInitialization": false,
   "baseUrl": "./src",
-    "paths": {
-      "@modules/*":["modules/*"],
-      "@config/*":["config/*"],
-      "@shared/*":["shared/*"]
-    },
+    // "paths": {
+    //   "@modules/*":["modules/*"],
+    //   "@config/*":["config/*"],
+    //   "@shared/*":["shared/*"]
+    // },
   "esModuleInterop": true,
 
 
@@ -23,6 +23,7 @@
     "emitDecoratorMetadata": true,
 
 
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "lib": [ "es2015" ]
   }
 }
