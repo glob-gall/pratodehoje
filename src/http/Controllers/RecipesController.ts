@@ -20,7 +20,7 @@ export default class RecipeController {
 
   public async read(request: Request, response: Response): Promise<Response> {
     const findRecipes = new FindRecipeService()
-    const recipes = findRecipes.execute()
+    const recipes = await findRecipes.execute()
 
     return response.json(recipes)
   }
