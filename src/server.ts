@@ -3,7 +3,7 @@ import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 
 import routes from './http/routes'
-import AppError from './database/errors/AppError'
+import AppError from './shared/errors/AppError'
 
 const app = express()
 

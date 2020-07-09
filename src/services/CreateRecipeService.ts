@@ -1,6 +1,6 @@
-import RecipesRepository from '../database/repositories/RecipesReposiotry'
-import Recipe from '../database/entities/Recipe'
-import IRecipesRepository from '../database/repositories/IRecipesRepository'
+import RecipesRepository from '../shared/database/repositories/RecipesReposiotry'
+import Recipe from '../shared/database/entities/Recipe'
+// import IRecipesRepository from '../database/repositories/IRecipesRepository'
 
 interface IRequest {
   name: string
@@ -11,11 +11,7 @@ interface IRequest {
 }
 
 class CreateRecipeService {
-  private recipesRepository: IRecipesRepository
-
-  constructor() {
-    this.recipesRepository = new RecipesRepository()
-  }
+  private recipesRepository = new RecipesRepository()
 
   public async execute({
     name,
@@ -24,7 +20,7 @@ class CreateRecipeService {
     ingredients,
     equipaments,
   }: IRequest): Promise<Recipe> {
-    const recipes = await this.recipesRepository.create({
+    const recipe = await this.recipesRepository.create({
       name,
       method,
       image_url,
@@ -32,7 +28,7 @@ class CreateRecipeService {
       equipaments,
     })
 
-    return recipes
+    return recipe
   }
 }
 
