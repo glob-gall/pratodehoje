@@ -1,4 +1,6 @@
 import 'reflect-metadata'
+import './shared/database'
+
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 

@@ -1,4 +1,5 @@
 {
+  "name": "default",
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
@@ -6,13 +7,13 @@
   "password": "docker",
   "database": "pratodehoje",
   "entities":[
-    "./src/entities/*.ts"
+    "./src/shared/database/entities/*.ts"
   ],
   "migrations":[
-    "./src/database/migrations/*.ts"
+    "./src/shared/database/migrations/*.ts"
   ],
   "cli":{
-    "migrationsDir":"./src/database/migrations"
+    "migrationsDir":"./src/shared/database/migrations"
   }
 }
 

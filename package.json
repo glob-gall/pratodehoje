@@ -14,7 +14,7 @@
     "uuidv4": "^6.1.1"
   },
   "scripts": {
-    "dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts",
+    "dev:server": "ts-node-dev --inspect --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {

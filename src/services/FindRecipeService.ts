@@ -1,6 +1,6 @@
-import RecipesRepository from '../database/repositories/RecipesReposiotry'
-import Recipe from '../database/entities/Recipe'
-import IRecipesRepository from '../database/repositories/IRecipesRepository'
+import RecipesRepository from '../shared/database/repositories/RecipesReposiotry'
+import Recipe from '../shared/database/entities/Recipe'
+import IRecipesRepository from '../shared/database/repositories/IRecipesRepository'
 
 class FindRecipeService {
   private recipesRepository: IRecipesRepository
