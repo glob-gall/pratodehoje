@@ -7,13 +7,13 @@
   "password": "docker",
   "database": "pratodehoje",
   "entities":[
-    "./src/shared/database/entities/*.ts"
+    "./src/entities/*.ts"
   ],
   "migrations":[
-    "./src/shared/database/migrations/*.ts"
+    "./src/database/migrations/*.ts"
   ],
   "cli":{
-    "migrationsDir":"./src/shared/database/migrations"
+    "migrationsDir":"./src/database/migrations"
   }
 }
 
