@@ -1,10 +1,13 @@
 import { Request, Response } from 'express'
-import CreateRecipeService from './CreateRecipeUseCase'
+import CreateRecipeUseCase from './CreateRecipeUseCase'
 
 export default class RecipeController {
-  constructor(private createRecipeUseCase: CreateRecipeService) {}
+  constructor(private createRecipeUseCase: CreateRecipeUseCase) {}
 
-  public async create(request: Request, response: Response): Promise<Response> {
+  public async execute(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     const { name, method, image_url, ingredients, equipaments } = request.body
 
     const recipe = await this.createRecipeUseCase.execute({

@@ -1,9 +1,14 @@
+import { inject, injectable } from 'tsyringe'
 import IRecipesRepository from '../../repositories/IRecipesRepository'
 import Recipe from '../../entities/Recipe'
 import { ICreateRecipeDTO } from './ICreateRecipeDTO'
 
-class CreateRecipeService {
-  constructor(private recipesRepository: IRecipesRepository) {}
+@injectable()
+class CreateRecipeUseCase {
+  constructor(
+    @inject('RecipesRepository')
+    private recipesRepository: IRecipesRepository,
+  ) {}
 
   public async execute({
     equipaments,
@@ -24,4 +29,4 @@ class CreateRecipeService {
   }
 }
 
-export default CreateRecipeService
+export default CreateRecipeUseCase

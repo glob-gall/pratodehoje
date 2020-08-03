@@ -1,11 +1,8 @@
+import { container } from 'tsyringe'
 import FindRecipeUseCase from './FindRecipeUseCase'
 import FindRecipeController from './FindRecipeController'
-import RecipeRepository from '../../repositories/implementations/RecipesReposiotry'
 
-const recipeRepository = new RecipeRepository()
-
-const findRecipeUseCase = new FindRecipeUseCase(recipeRepository)
-
+const findRecipeUseCase = container.resolve(FindRecipeUseCase)
 const findRecipeController = new FindRecipeController(findRecipeUseCase)
 
-export { findRecipeController, findRecipeUseCase }
+export { findRecipeController }

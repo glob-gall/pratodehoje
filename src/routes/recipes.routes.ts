@@ -4,7 +4,7 @@ import { findRecipeController } from '../useCases/FindRecipe/index'
 
 const recipesRoutes = Router()
 
-recipesRoutes.post('/', createRecipeController.create)
-recipesRoutes.get('/', findRecipeController.read)
+recipesRoutes.post('/', createRecipeController.execute)
+recipesRoutes.get('/', findRecipeController.execute)
 
 export default recipesRoutes
