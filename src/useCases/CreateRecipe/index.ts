@@ -1,9 +1,5 @@
-import { container } from 'tsyringe'
 import CreateRecipeController from './CreateRecipeController'
-import CreateRecipeUseCase from './CreateRecipeUseCase'
 
-const createRecipeUseCase = container.resolve(CreateRecipeUseCase)
-
-const createRecipeController = new CreateRecipeController(createRecipeUseCase)
+const createRecipeController = new CreateRecipeController()
 
 export { createRecipeController }
