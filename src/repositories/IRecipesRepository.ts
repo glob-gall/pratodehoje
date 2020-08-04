@@ -11,4 +11,5 @@ interface ICreateRecipe {
 export default interface IRecipesRepository {
   create(data: ICreateRecipe): Promise<Recipe>
   find(): Promise<Recipe[]>
+  delete(id: string): Promise<void>
 }

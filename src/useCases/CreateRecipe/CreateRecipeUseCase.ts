@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 import IRecipesRepository from '../../repositories/IRecipesRepository'
 import Recipe from '../../entities/Recipe'
-import { ICreateRecipeDTO } from './ICreateRecipeDTO'
+import { IRecipeDTO } from '../DTOS/IRecipe'
 
 @injectable()
 class CreateRecipeUseCase {
@@ -16,12 +16,14 @@ class CreateRecipeUseCase {
     ingredients,
     method,
     name,
-  }: ICreateRecipeDTO): Promise<Recipe> {
+  }: IRecipeDTO): Promise<Recipe> {
+    const ingredientsToString = ingredients.join()
+    const methodToString = method.join()
     const recipe = await this.recipesRepository.create({
       equipaments,
       image_url,
-      ingredients,
-      method,
+      ingredients: ingredientsToString,
+      method: methodToString,
       name,
     })
 

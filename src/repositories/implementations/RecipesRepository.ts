@@ -1,5 +1,5 @@
 import { getRepository, Repository } from 'typeorm'
-import { ICreateRecipeDTO } from 'useCases/CreateRecipe/ICreateRecipeDTO'
+import { ICreateRecipeDTO } from '../DTOS/ICreateRecipeDTO'
 import IRecipesRepository from '../IRecipesRepository'
 
 import Recipe from '../../entities/Recipe'
@@ -22,6 +22,10 @@ class RecipesRepository implements IRecipesRepository {
     const recipes = await this.ormRepository.find()
 
     return recipes
+  }
+
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id)
   }
 }
 

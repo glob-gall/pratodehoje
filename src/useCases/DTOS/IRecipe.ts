@@ -1,0 +1,9 @@
+interface IRecipeDTO {
+  name: string
+  method: string[]
+  image_url: string
+  ingredients: string[]
+  equipaments: string
+}
+
+export { IRecipeDTO }
