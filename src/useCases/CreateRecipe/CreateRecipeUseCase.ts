@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 import IRecipesRepository from '../../repositories/IRecipesRepository'
 import Recipe from '../../entities/Recipe'
-import { IRecipeDTO } from '../DTOS/IRecipe'
+import { IRecipeDTO } from '../_DTOS/IRecipe'
 
 @injectable()
 class CreateRecipeUseCase {

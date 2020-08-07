@@ -9,19 +9,27 @@ class FindRecipeUseCase {
     private recipesRepository: IRecipesRepository,
   ) {}
 
-  public async execute(): Promise<IRecipeDTO[]> {
+  public async execute(ingredients: string[]): Promise<IRecipeDTO[]> {
     const recipes = await this.recipesRepository.find()
 
-    const recipesIngredientsArray = recipes.map(recipe => {
-      const ingredients = recipe.ingredients.split(',')
+    const recipesIngredientsArray = recipes.reduce((recipeList, recipe) => {
+      const assignIngredients = recipe.ingredients.split(',')
       const method = recipe.method.split(',')
 
+      const containsIngredients = ingredients.every(ingredient =>
+        assignIngredients.includes(ingredient),
+      )
       const recipeIngredientArray = Object.assign(recipe, {
-        ingredients,
+        ingredients: assignIngredients,
         method,
       })
-      return recipeIngredientArray
-    })
+
+      if (!containsIngredients) {
+        return recipeList
+      }
+
+      return [...recipeList, recipeIngredientArray]
+    }, <IRecipeDTO[]>[])
 
     return recipesIngredientsArray
   }
