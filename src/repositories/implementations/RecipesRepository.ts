@@ -19,7 +19,9 @@ class RecipesRepository implements IRecipesRepository {
   }
 
   public async find(): Promise<Recipe[]> {
-    const recipes = await this.ormRepository.find()
+    const recipes = await this.ormRepository.find({
+      relations: ['ingredients'],
+    })
 
     return recipes
   }

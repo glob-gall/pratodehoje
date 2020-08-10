@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm'
+import Ingredient from './Ingredient'
 
 @Entity('recipes')
 class Recipe {
@@ -20,8 +22,8 @@ class Recipe {
   @Column()
   image_url: string
 
-  @Column()
-  ingredients: string
+  @OneToMany(() => Ingredient, ingredient => ingredient.recipe)
+  ingredients: Ingredient[]
 
   @Column()
   equipaments: string

@@ -1,8 +1,10 @@
+import Ingredient from 'entities/Ingredient'
+
 interface IRecipeDTO {
   name: string
   method: string[]
   image_url: string
-  ingredients: string[]
+  ingredients: Ingredient[]
   equipaments: string
 }
 

@@ -1,15 +1,9 @@
 import Recipe from '../entities/Recipe'
 
-interface ICreateRecipe {
-  name: string
-  method: string
-  image_url: string
-  ingredients: string
-  equipaments: string
-}
+import { ICreateRecipeDTO } from './DTOS/ICreateRecipeDTO'
 
 export default interface IRecipesRepository {
-  create(data: ICreateRecipe): Promise<Recipe>
+  create(data: ICreateRecipeDTO): Promise<Recipe>
   find(): Promise<Recipe[]>
   delete(id: string): Promise<void>
 }

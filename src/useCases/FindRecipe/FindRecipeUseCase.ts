@@ -13,11 +13,9 @@ class FindRecipeUseCase {
     const recipes = await this.recipesRepository.find()
 
     const recipesIngredientsArray = recipes.map(recipe => {
-      const ingredients = recipe.ingredients.split(',')
       const method = recipe.method.split(',')
 
       const recipeIngredientArray = Object.assign(recipe, {
-        ingredients,
         method,
       })
       return recipeIngredientArray
