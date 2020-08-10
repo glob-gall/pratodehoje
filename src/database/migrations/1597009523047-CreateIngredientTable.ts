@@ -16,6 +16,7 @@ export class CreateIngredientTable1597009523047 implements MigrationInterface {
           {
             name: 'recipe_id',
             type: 'uuid',
+            isNullable: true,
           },
           {
             name: 'name',

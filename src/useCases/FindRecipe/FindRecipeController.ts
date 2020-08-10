@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
+import { classToClass } from 'class-transformer'
 import FindRecipeUseCase from './FindRecipeUseCase'
 
 export default class RecipeController {
@@ -10,6 +11,6 @@ export default class RecipeController {
     const findRecipeUseCase = container.resolve(FindRecipeUseCase)
     const recipes = await findRecipeUseCase.execute()
 
-    return response.json(recipes)
+    return response.json(classToClass(recipes))
   }
 }

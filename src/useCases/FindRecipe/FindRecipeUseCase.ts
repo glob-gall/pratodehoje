@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 import IRecipesRepository from '../../repositories/IRecipesRepository'
-import { IRecipeDTO } from '../_DTOS/IRecipe'
+import { IRecipeDTO } from '../_DTOS/IRecipeDTO'
 
 @injectable()
 class FindRecipeUseCase {

@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm'
+import { Exclude } from 'class-transformer'
 import Ingredient from './Ingredient'
 
 @Entity('recipes')
@@ -29,9 +30,11 @@ class Recipe {
   equipaments: string
 
   @CreateDateColumn()
+  @Exclude()
   created_at: Date
 
   @UpdateDateColumn()
+  @Exclude()
   updated_at: Date
 }
 

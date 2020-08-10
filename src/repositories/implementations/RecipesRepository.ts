@@ -1,4 +1,9 @@
-import { getRepository, Repository } from 'typeorm'
+import {
+  getRepository,
+  Repository,
+  createQueryBuilder,
+  getManager,
+} from 'typeorm'
 import { ICreateRecipeDTO } from '../DTOS/ICreateRecipeDTO'
 import IRecipesRepository from '../IRecipesRepository'
 
@@ -12,9 +17,10 @@ class RecipesRepository implements IRecipesRepository {
   }
 
   public async create(recipe: ICreateRecipeDTO): Promise<Recipe> {
+    console.log(recipe)
+
     const newRecipe = this.ormRepository.create(recipe)
     await this.ormRepository.save(newRecipe)
-
     return newRecipe
   }
 
@@ -22,6 +28,20 @@ class RecipesRepository implements IRecipesRepository {
     const recipes = await this.ormRepository.find({
       relations: ['ingredients'],
     })
+
+    return recipes
+  }
+
+  public async findByIngredients(ingredients: string[]): Promise<Recipe[]> {
+    // const recipes = await this.ormRepository.find({
+    //   relations: ['ingredients'],
+    // })
+    const recipes = await getManager()
+      .createQueryBuilder(Recipe, 'recipes')
+      .innerJoin('recipes.ingredients', 'ingredients')
+      .where('ingredients.name IN (:...ingredients)', { ingredients })
+      .getMany()
+    console.log(recipes)
 
     return recipes
   }

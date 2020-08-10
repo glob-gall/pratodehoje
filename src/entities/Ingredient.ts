@@ -7,6 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm'
+import { Exclude } from 'class-transformer'
 import Recipe from './Recipe'
 
 @Entity('ingredients')
@@ -22,9 +23,11 @@ class Ingredient {
   recipe: Recipe
 
   @CreateDateColumn()
+  @Exclude()
   created_at: Date
 
   @UpdateDateColumn()
+  @Exclude()
   updated_at: Date
 }
 

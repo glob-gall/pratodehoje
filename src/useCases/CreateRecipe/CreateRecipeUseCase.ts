@@ -1,32 +1,44 @@
 import { inject, injectable } from 'tsyringe'
+import IIngredientsRepository from '../../repositories/IIngredientsRepository'
 import IRecipesRepository from '../../repositories/IRecipesRepository'
+
 import Recipe from '../../entities/Recipe'
-import { IRecipeDTO } from '../_DTOS/IRecipe'
+import { ICreateRecipeDTO } from '../_DTOS/ICreateRecipeDTO'
 
 @injectable()
 class CreateRecipeUseCase {
   constructor(
     @inject('RecipesRepository')
     private recipesRepository: IRecipesRepository,
+    @inject('IngredientsRepository')
+    private ingredientsRepository: IIngredientsRepository,
   ) {}
 
   public async execute({
     equipaments,
     image_url,
-    ingredients,
+    ingredientsNames,
     method,
     name,
-  }: IRecipeDTO): Promise<Recipe> {
-    const ingredientsToString = ingredients.join()
+  }: ICreateRecipeDTO): Promise<Recipe> {
     const methodToString = method.join()
+
+    const ingredintsPromises = ingredientsNames.map(async ingredient => {
+      return this.ingredientsRepository.create(ingredient)
+    })
+    const newIngredients = await Promise.all(ingredintsPromises)
+
     const recipe = await this.recipesRepository.create({
       equipaments,
       image_url,
-      ingredients: ingredientsToString,
+      ingredients: newIngredients,
       method: methodToString,
       name,
     })
 
+    // console.log(newIngredients)
+
+    // return Object.assign(recipe, { ingredients: newIngredients })
     return recipe
   }
 }
