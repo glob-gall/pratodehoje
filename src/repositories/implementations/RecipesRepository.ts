@@ -3,6 +3,7 @@ import {
   Repository,
   createQueryBuilder,
   getManager,
+  SelectQueryBuilder,
 } from 'typeorm'
 import { ICreateRecipeDTO } from '../DTOS/ICreateRecipeDTO'
 import IRecipesRepository from '../IRecipesRepository'
@@ -33,17 +34,21 @@ class RecipesRepository implements IRecipesRepository {
   }
 
   public async findByIngredients(ingredients: string[]): Promise<Recipe[]> {
-    // const recipes = await this.ormRepository.find({
-    //   relations: ['ingredients'],
-    // })
-    const recipes = await getManager()
-      .createQueryBuilder(Recipe, 'recipes')
+    const recipes = await this.ormRepository
+      .createQueryBuilder('recipes')
+      .select('recipes.id')
       .innerJoin('recipes.ingredients', 'ingredients')
       .where('ingredients.name IN (:...ingredients)', { ingredients })
       .getMany()
-    console.log(recipes)
+    const recipesIds = recipes.map(recipe => recipe.id)
 
-    return recipes
+    const promisesRecipes = await this.ormRepository
+      .createQueryBuilder('recipes')
+      .innerJoinAndSelect('recipes.ingredients', 'ingredients')
+      .where('recipes.id IN (:...recipesIds)', { recipesIds })
+      .getMany()
+
+    return promisesRecipes
   }
 
   public async delete(id: string): Promise<void> {
