@@ -40,6 +40,9 @@ class RecipesRepository implements IRecipesRepository {
       .innerJoin('recipes.ingredients', 'ingredients')
       .where('ingredients.name IN (:...ingredients)', { ingredients })
       .getMany()
+    if (recipes.length === 0) {
+      return []
+    }
     const recipesIds = recipes.map(recipe => recipe.id)
 
     const promisesRecipes = await this.ormRepository

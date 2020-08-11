@@ -3,7 +3,7 @@ import IRecipesRepository from '../../repositories/IRecipesRepository'
 import Recipe from '../../entities/Recipe'
 
 @injectable()
-class FindRecipeUseCase {
+class FindRecipeByIngredientsUseCase {
   constructor(
     @inject('RecipesRepository')
     private recipesRepository: IRecipesRepository,
@@ -16,4 +16,4 @@ class FindRecipeUseCase {
   }
 }
 
-export default FindRecipeUseCase
+export default FindRecipeByIngredientsUseCase
