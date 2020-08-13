@@ -25,12 +25,23 @@ class RecipesRepository implements IRecipesRepository {
     return newRecipe
   }
 
-  public async find(): Promise<Recipe[]> {
+  public async findAll(): Promise<Recipe[]> {
     const recipes = await this.ormRepository.find({
       relations: ['ingredients'],
     })
 
     return recipes
+  }
+
+  public async find(id: string): Promise<Recipe | undefined> {
+    const recipe = await this.ormRepository.findOne(
+      { id },
+      {
+        relations: ['ingredients'],
+      },
+    )
+
+    return recipe
   }
 
   public async findByIngredients(ingredients: string[]): Promise<Recipe[]> {

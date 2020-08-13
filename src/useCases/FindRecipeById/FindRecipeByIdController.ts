@@ -1,15 +1,16 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { classToClass } from 'class-transformer'
-import FindRecipeUseCase from './FindRecipeUseCase'
+import FindRecipeByIdUseCase from './FindRecipeByIdUseCase'
 
-export default class RecipeController {
+export default class FindRecipeByIdController {
   public async execute(
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const findRecipeUseCase = container.resolve(FindRecipeUseCase)
-    const recipes = await findRecipeUseCase.execute()
+    const { id } = request.params
+    const findRecipeByIdUseCase = container.resolve(FindRecipeByIdUseCase)
+    const recipes = await findRecipeByIdUseCase.execute(id)
 
     return response.json(classToClass(recipes))
   }
