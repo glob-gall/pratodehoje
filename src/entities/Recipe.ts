@@ -18,6 +18,9 @@ class Recipe {
   name: string
 
   @Column()
+  time: number
+
+  @Column()
   method: string
 
   @Column()

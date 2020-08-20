@@ -10,6 +10,7 @@ export default class RecipeController {
   ): Promise<Response> {
     const {
       name,
+      time,
       method,
       image_url,
       ingredientsNames,
@@ -20,6 +21,7 @@ export default class RecipeController {
 
     const recipe = await createRecipeUseCase.execute({
       name,
+      time,
       method,
       image_url,
       ingredientsNames,

@@ -20,6 +20,7 @@ class CreateRecipeUseCase {
     ingredientsNames,
     method,
     name,
+    time,
   }: ICreateRecipeDTO): Promise<Recipe> {
     const methodToString = method.join()
 
@@ -34,6 +35,7 @@ class CreateRecipeUseCase {
       ingredients: newIngredients,
       method: methodToString,
       name,
+      time,
     })
 
     // console.log(newIngredients)
