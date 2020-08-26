@@ -1,10 +1,4 @@
-import {
-  getRepository,
-  Repository,
-  createQueryBuilder,
-  getManager,
-  SelectQueryBuilder,
-} from 'typeorm'
+import { getRepository, Repository } from 'typeorm'
 import { ICreateRecipeDTO } from '../DTOS/ICreateRecipeDTO'
 import IRecipesRepository from '../IRecipesRepository'
 
@@ -18,8 +12,6 @@ class RecipesRepository implements IRecipesRepository {
   }
 
   public async create(recipe: ICreateRecipeDTO): Promise<Recipe> {
-    console.log(recipe)
-
     const newRecipe = this.ormRepository.create(recipe)
     await this.ormRepository.save(newRecipe)
     return newRecipe

@@ -9,8 +9,10 @@ class FindRecipeByIngredientsUseCase {
     private recipesRepository: IRecipesRepository,
   ) {}
 
-  public async execute(ingredients: string[]): Promise<Recipe[]> {
-    const recipes = await this.recipesRepository.findByIngredients(ingredients)
+  public async execute(ingredientsNames: string[]): Promise<Recipe[]> {
+    const recipes = await this.recipesRepository.findByIngredients(
+      ingredientsNames,
+    )
 
     return recipes
   }

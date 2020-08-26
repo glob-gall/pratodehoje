@@ -11,8 +11,17 @@ class IngredientsRepository implements IIngredientsRepository {
   }
 
   public async create(name: string): Promise<Ingredient> {
-    const ingredient = this.ormRepository.create({ name })
-    await this.ormRepository.save(ingredient)
+    let ingredient = await this.ormRepository.findOne({
+      where: {
+        name,
+      },
+    })
+
+    if (!ingredient) {
+      ingredient = this.ormRepository.create({ name })
+      await this.ormRepository.save(ingredient)
+    }
+
     return ingredient
   }
 }

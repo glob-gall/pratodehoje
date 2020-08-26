@@ -8,7 +8,7 @@ import { findRecipeByIdController } from '../useCases/FindRecipeById'
 const recipesRoutes = Router()
 
 recipesRoutes.post('/', createRecipeController.execute)
-recipesRoutes.get('/all', findAllRecipesController.execute)
+recipesRoutes.get('/', findAllRecipesController.execute)
 recipesRoutes.post('/ingredients', findRecipeByIngredientsController.execute)
 recipesRoutes.delete('/:id', deleteRecipeController.execute)
 recipesRoutes.get('/:id', findRecipeByIdController.execute)
