@@ -4,6 +4,8 @@ import IngredientsRepository from '../repositories/implementations/IngredientsRe
 import IRecipesRepository from '../repositories/IRecipesRepository'
 import RecipesRepository from '../repositories/implementations/RecipesRepository'
 import IIngredientsRepository from '../repositories/IIngredientsRepository'
+import UsersRepository from '../repositories/implementations/UsersRepository'
+import IUsersRepository from '../repositories/IUsersRepository'
 
 container.registerSingleton<IRecipesRepository>(
   'RecipesRepository',
@@ -12,4 +14,8 @@ container.registerSingleton<IRecipesRepository>(
 container.registerSingleton<IIngredientsRepository>(
   'IngredientsRepository',
   IngredientsRepository,
+)
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository,
 )

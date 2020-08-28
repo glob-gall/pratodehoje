@@ -5,9 +5,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import Ingredient from './Ingredient'
+import User from './User'
 
 @Entity('recipes')
 class Recipe {
@@ -28,6 +31,13 @@ class Recipe {
 
   @OneToMany(() => Ingredient, ingredient => ingredient.recipe)
   ingredients: Ingredient[]
+
+  @ManyToOne(() => User, user => user.recipes)
+  @JoinColumn({ name: 'user_id' })
+  user: User
+
+  @Column()
+  user_id: string
 
   @Column()
   equipaments: string

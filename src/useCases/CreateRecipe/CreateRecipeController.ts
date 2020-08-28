@@ -3,7 +3,7 @@ import { container } from 'tsyringe'
 import { classToClass } from 'class-transformer'
 import CreateRecipeUseCase from './CreateRecipeUseCase'
 
-export default class RecipeController {
+export default class CreateRecipeController {
   public async execute(
     request: Request,
     response: Response,
@@ -16,6 +16,7 @@ export default class RecipeController {
       ingredientsNames,
       equipaments,
     } = request.body
+    const { id } = request.user
 
     const createRecipeUseCase = container.resolve(CreateRecipeUseCase)
 
@@ -26,6 +27,7 @@ export default class RecipeController {
       image_url,
       ingredientsNames,
       equipaments,
+      user_id: id,
     })
     return response.json(classToClass(recipe))
   }

@@ -21,6 +21,8 @@ export class JoinTablesRecipesIngredients1597010267612
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropForeignKey('ingredients', 'recipe_id')
+
     await queryRunner.addColumn(
       'recipes',
       new TableColumn({
@@ -28,6 +30,5 @@ export class JoinTablesRecipesIngredients1597010267612
         type: 'varchar',
       }),
     )
-    await queryRunner.dropForeignKey('ingredients', 'recipe_id')
   }
 }

@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 import IRecipesRepository from '../../repositories/IRecipesRepository'
-import { IRecipeDTO } from '../_DTOS/IRecipeDTO'
+import Recipe from '../../entities/Recipe'
 
 @injectable()
 class FindAllRecipesUseCase {
@@ -9,7 +9,7 @@ class FindAllRecipesUseCase {
     private recipesRepository: IRecipesRepository,
   ) {}
 
-  public async execute(): Promise<IRecipeDTO[]> {
+  public async execute(): Promise<Recipe[]> {
     const recipes = await this.recipesRepository.findAll()
 
     const recipesIngredientsArray = recipes.map(recipe => {

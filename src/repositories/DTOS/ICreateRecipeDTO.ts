@@ -7,5 +7,6 @@ interface ICreateRecipeDTO {
   image_url: string
   ingredients: Ingredient[]
   equipaments: string
+  user_id: string
 }
 export { ICreateRecipeDTO }

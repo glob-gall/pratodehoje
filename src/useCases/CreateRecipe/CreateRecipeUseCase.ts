@@ -21,6 +21,7 @@ class CreateRecipeUseCase {
     method,
     name,
     time,
+    user_id,
   }: ICreateRecipeDTO): Promise<Recipe> {
     const methodToString = method.join()
 
@@ -36,11 +37,8 @@ class CreateRecipeUseCase {
       method: methodToString,
       name,
       time,
+      user_id,
     })
-
-    // console.log(newIngredients)
-
-    // return Object.assign(recipe, { ingredients: newIngredients })
     return recipe
   }
 }

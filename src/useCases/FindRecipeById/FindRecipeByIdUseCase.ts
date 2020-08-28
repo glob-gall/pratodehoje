@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 import IRecipesRepository from '../../repositories/IRecipesRepository'
-import { IRecipeDTO } from '../_DTOS/IRecipeDTO'
+import Recipe from '../../entities/Recipe'
 import AppError from '../../utils/errors/AppError'
 
 @injectable()
@@ -10,7 +10,7 @@ class FindRecipeByIdUseCase {
     private recipesRepository: IRecipesRepository,
   ) {}
 
-  public async execute(id: string): Promise<IRecipeDTO> {
+  public async execute(id: string): Promise<Recipe> {
     const recipe = await this.recipesRepository.find(id)
     if (!recipe) throw new AppError('Recipe not Found')
 
