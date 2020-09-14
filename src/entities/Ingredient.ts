@@ -4,8 +4,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
+  ManyToMany,
 } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import Recipe from './Recipe'
@@ -18,9 +17,8 @@ class Ingredient {
   @Column()
   name: string
 
-  @ManyToOne(() => Recipe, recipe => recipe.ingredients)
-  @JoinColumn({ name: 'recipe_id' })
-  recipe: Recipe
+  @ManyToMany(type => Recipe, recipe => recipe.ingredients)
+  recipes: Recipe[]
 
   @CreateDateColumn()
   @Exclude()

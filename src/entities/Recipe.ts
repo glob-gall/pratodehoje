@@ -4,9 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  ManyToMany,
   ManyToOne,
   JoinColumn,
+  JoinTable,
 } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import Ingredient from './Ingredient'
@@ -29,7 +30,10 @@ class Recipe {
   @Column()
   image_url: string
 
-  @OneToMany(() => Ingredient, ingredient => ingredient.recipe)
+  @ManyToMany(type => Ingredient, ingredient => ingredient.recipes, {
+    eager: true,
+  })
+  @JoinTable()
   ingredients: Ingredient[]
 
   @ManyToOne(() => User, user => user.recipes)
@@ -38,9 +42,6 @@ class Recipe {
 
   @Column()
   user_id: string
-
-  @Column()
-  equipaments: string
 
   @CreateDateColumn()
   @Exclude()

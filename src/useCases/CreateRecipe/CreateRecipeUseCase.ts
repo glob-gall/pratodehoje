@@ -26,7 +26,7 @@ class CreateRecipeUseCase {
     const methodToString = method.join()
 
     const ingredintsPromises = ingredientsNames.map(async ingredient => {
-      return this.ingredientsRepository.create(ingredient)
+      return this.ingredientsRepository.findOrCreate(ingredient)
     })
     const newIngredients = await Promise.all(ingredintsPromises)
 

@@ -1,5 +1,5 @@
 import Ingredient from '../entities/Ingredient'
 
 export default interface IIngredientsRepository {
-  create(name: string): Promise<Ingredient>
+  findOrCreate(name: string): Promise<Ingredient>
 }

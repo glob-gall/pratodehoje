@@ -17,6 +17,9 @@ class User {
   @Column()
   name: string
 
+  @Column({ nullable: true })
+  avatar: string
+
   @Column()
   email: string
 
@@ -24,7 +27,7 @@ class User {
   @Exclude()
   password: string
 
-  @OneToMany(() => Recipe, recipe => recipe.user)
+  @OneToMany(() => Recipe, recipe => recipe.user, { eager: true })
   recipes: Recipe[]
 
   @CreateDateColumn()

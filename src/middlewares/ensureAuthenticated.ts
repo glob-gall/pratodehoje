@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
+import { container } from 'tsyringe'
 import auth from '../config/auth'
 import AppError from '../utils/errors/AppError'
+import { FindUserUseCase } from '../useCases/FindUser'
 
 interface TokenPayload {
   iat: number
@@ -9,11 +11,11 @@ interface TokenPayload {
   sub: string
 }
 
-export default function ensureAuthenticated(
+export default async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction,
-): void {
+): Promise<void> {
   const authHeader = request.headers.authorization
 
   if (!authHeader) {
@@ -27,6 +29,9 @@ export default function ensureAuthenticated(
     const decoded = verify(token, secret)
 
     const { sub } = decoded as TokenPayload
+
+    const findUser = container.resolve(FindUserUseCase)
+    await findUser.execute(sub)
 
     request.user = {
       id: sub,

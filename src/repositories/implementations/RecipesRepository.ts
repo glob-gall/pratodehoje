@@ -3,6 +3,7 @@ import { ICreateRecipeDTO } from '../DTOS/ICreateRecipeDTO'
 import IRecipesRepository from '../IRecipesRepository'
 
 import Recipe from '../../entities/Recipe'
+import Ingredient from '../../entities/Ingredient'
 
 class RecipesRepository implements IRecipesRepository {
   private ormRepository: Repository<Recipe>
@@ -13,6 +14,7 @@ class RecipesRepository implements IRecipesRepository {
 
   public async create(recipe: ICreateRecipeDTO): Promise<Recipe> {
     const newRecipe = this.ormRepository.create(recipe)
+
     await this.ormRepository.save(newRecipe)
     return newRecipe
   }
@@ -36,25 +38,13 @@ class RecipesRepository implements IRecipesRepository {
     return recipe
   }
 
-  public async findByIngredients(ingredients: string[]): Promise<Recipe[]> {
-    const recipes = await this.ormRepository
-      .createQueryBuilder('recipes')
-      .select('recipes.id')
-      .innerJoin('recipes.ingredients', 'ingredients')
-      .where('ingredients.name IN (:...ingredients)', { ingredients })
-      .getMany()
-    if (recipes.length === 0) {
-      return []
-    }
-    const recipesIds = recipes.map(recipe => recipe.id)
-
-    const promisesRecipes = await this.ormRepository
-      .createQueryBuilder('recipes')
-      .innerJoinAndSelect('recipes.ingredients', 'ingredients')
-      .where('recipes.id IN (:...recipesIds)', { recipesIds })
-      .getMany()
-
-    return promisesRecipes
+  public async findByIngredients(ingredients: Ingredient[]): Promise<Recipe[]> {
+    const recipes = await this.ormRepository.find({
+      where: {
+        ingredients,
+      },
+    })
+    return recipes
   }
 
   public async delete(id: string): Promise<void> {

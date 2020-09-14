@@ -10,7 +10,7 @@ class IngredientsRepository implements IIngredientsRepository {
     this.ormRepository = getRepository(Ingredient)
   }
 
-  public async create(name: string): Promise<Ingredient> {
+  public async findOrCreate(name: string): Promise<Ingredient> {
     let ingredient = await this.ormRepository.findOne({
       where: {
         name,
