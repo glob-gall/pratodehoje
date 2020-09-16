@@ -1,5 +1,7 @@
 import { container } from 'tsyringe'
 
+import './providers'
+
 import IngredientsRepository from '../repositories/implementations/IngredientsRepository'
 import IRecipesRepository from '../repositories/IRecipesRepository'
 import RecipesRepository from '../repositories/implementations/RecipesRepository'

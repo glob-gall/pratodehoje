@@ -4,10 +4,8 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
 } from 'typeorm'
 import { Exclude } from 'class-transformer'
-import Recipe from './Recipe'
 
 @Entity('ingredients')
 class Ingredient {
@@ -16,9 +14,6 @@ class Ingredient {
 
   @Column()
   name: string
-
-  @ManyToMany(type => Recipe, recipe => recipe.ingredients)
-  recipes: Recipe[]
 
   @CreateDateColumn()
   @Exclude()

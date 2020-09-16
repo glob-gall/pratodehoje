@@ -39,11 +39,7 @@ class RecipesRepository implements IRecipesRepository {
   }
 
   public async findByIngredients(ingredients: Ingredient[]): Promise<Recipe[]> {
-    const recipes = await this.ormRepository.find({
-      where: {
-        ingredients,
-      },
-    })
+    const recipes = await this.ormRepository.find()
     return recipes
   }
 

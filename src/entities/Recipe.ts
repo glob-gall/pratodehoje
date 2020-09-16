@@ -30,7 +30,10 @@ class Recipe {
   @Column()
   image_url: string
 
-  @ManyToMany(type => Ingredient, ingredient => ingredient.recipes, {
+  // @ManyToMany(type => Ingredient, ingredient => ingredient.recipes, {
+  //   eager: true,
+  // })
+  @ManyToMany(type => Ingredient, {
     eager: true,
   })
   @JoinTable()
