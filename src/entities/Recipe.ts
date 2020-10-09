@@ -30,13 +30,9 @@ class Recipe {
   @Column()
   image_url: string
 
-  // @ManyToMany(type => Ingredient, ingredient => ingredient.recipes, {
-  //   eager: true,
-  // })
-  @ManyToMany(type => Ingredient, {
-    eager: true,
-  })
+  @ManyToMany(type => Ingredient)
   @JoinTable()
+  // @JoinColumn({ name: 'recipesId' })
   ingredients: Ingredient[]
 
   @ManyToOne(() => User, user => user.recipes)

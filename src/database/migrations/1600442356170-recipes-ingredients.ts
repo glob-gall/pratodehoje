@@ -1,8 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
 
-export default class CreateManyToManyRecipeIngredients1599498551119
-  implements MigrationInterface {
-  name = 'CreateManyToManyRecipeIngredients1599498551119'
+export class recipesIngredients1600442356170 implements MigrationInterface {
+  name = 'recipesIngredients1600442356170'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
@@ -21,11 +20,15 @@ export default class CreateManyToManyRecipeIngredients1599498551119
       `CREATE INDEX "IDX_39b388ccc78dde4d852ea76f1b" ON "recipes_ingredients_ingredients" ("ingredientsId") `,
     )
     await queryRunner.query(`ALTER TABLE "ingredients" DROP COLUMN "recipe_id"`)
+    await queryRunner.query(`ALTER TABLE "recipes" DROP COLUMN "equipaments"`)
     await queryRunner.query(
       `ALTER TABLE "users" DROP CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3"`,
     )
     await queryRunner.query(
       `ALTER TABLE "recipes" ALTER COLUMN "time" SET NOT NULL`,
+    )
+    await queryRunner.query(
+      `ALTER TABLE "recipes" ALTER COLUMN "user_id" SET NOT NULL`,
     )
     await queryRunner.query(
       `ALTER TABLE "recipes" ADD CONSTRAINT "FK_67d98fd6ff56c4340a811402154" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
@@ -49,10 +52,16 @@ export default class CreateManyToManyRecipeIngredients1599498551119
       `ALTER TABLE "recipes" DROP CONSTRAINT "FK_67d98fd6ff56c4340a811402154"`,
     )
     await queryRunner.query(
+      `ALTER TABLE "recipes" ALTER COLUMN "user_id" DROP NOT NULL`,
+    )
+    await queryRunner.query(
       `ALTER TABLE "recipes" ALTER COLUMN "time" DROP NOT NULL`,
     )
     await queryRunner.query(
       `ALTER TABLE "users" ADD CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3" UNIQUE ("email")`,
+    )
+    await queryRunner.query(
+      `ALTER TABLE "recipes" ADD "equipaments" character varying NOT NULL`,
     )
     await queryRunner.query(`ALTER TABLE "ingredients" ADD "recipe_id" uuid`)
     await queryRunner.query(`DROP INDEX "IDX_39b388ccc78dde4d852ea76f1b"`)

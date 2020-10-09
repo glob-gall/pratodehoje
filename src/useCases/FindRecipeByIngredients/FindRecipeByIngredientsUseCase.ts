@@ -13,19 +13,18 @@ class FindRecipeByIngredientsUseCase {
   ) {}
 
   public async execute(ingredientsNames: string[]): Promise<Recipe[]> {
-    const ingredientsPromises = ingredientsNames.map(async ingredientName => {
-      const ingredient = await this.ingredientsRepository.findOrCreate(
-        ingredientName,
+    const checker = (ingredients: string[], ingredientNames: string[]) =>
+      ingredientNames.every(ingredient => ingredients.includes(ingredient))
+
+    const recipes = await this.recipesRepository.findAll()
+    const recipesReduced = recipes.filter(recipe => {
+      const RecipeIngredientsNames = recipe.ingredients.map(
+        ingredient => ingredient.name,
       )
-
-      return ingredient
+      return checker(RecipeIngredientsNames, ingredientsNames)
     })
-    const ingredients = await Promise.all(ingredientsPromises)
-    console.log(ingredients)
 
-    const recipes = await this.recipesRepository.findByIngredients(ingredients)
-
-    return recipes
+    return recipesReduced
   }
 }
 
