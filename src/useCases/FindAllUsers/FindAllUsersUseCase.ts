@@ -1,6 +1,5 @@
 import { inject, injectable } from 'tsyringe'
 import IUsersRepository from '../../repositories/IUsersRepository'
-import User from '../../entities/User'
 
 interface userForList {
   email: string
@@ -16,8 +15,8 @@ class FindAllRecipesUseCase {
     private usersRepository: IUsersRepository,
   ) {}
 
-  public async execute(): Promise<userForList[]> {
-    const users = await this.usersRepository.findAllUsers()
+  public async execute(userId: string): Promise<userForList[]> {
+    const users = await this.usersRepository.findAll(userId)
 
     const usersWithRecipeNumber = users.map(user => {
       const { email, id, name, recipes } = user

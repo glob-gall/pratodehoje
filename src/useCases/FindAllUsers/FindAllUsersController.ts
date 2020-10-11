@@ -9,7 +9,8 @@ export default class FindAllUsersController {
     response: Response,
   ): Promise<Response> {
     const findAllUsersUseCase = container.resolve(FindAllUsersUseCase)
-    const users = await findAllUsersUseCase.execute()
+
+    const users = await findAllUsersUseCase.execute(request.user.id)
 
     return response.json(classToClass(users))
   }

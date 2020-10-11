@@ -1,5 +1,6 @@
 import multer from 'multer'
 import { Router } from 'express'
+import verifyAuthentication from '../middlewares/verifyAuthentication'
 import { updateUserAvatarController } from '../useCases/UpdateUserAvatar'
 import ensureAuthenticated from '../middlewares/ensureAuthenticated'
 import { createUserController } from '../useCases/CreateUser'
@@ -12,7 +13,7 @@ const upload = multer(uploadConfig.multer)
 
 userRoutes.post('/', createUserController.execute)
 userRoutes.get('/:id', findUserController.execute)
-userRoutes.get('/', findAllUsersController.execute)
+userRoutes.get('/', verifyAuthentication, findAllUsersController.execute)
 userRoutes.patch(
   '/avatar',
   ensureAuthenticated,
