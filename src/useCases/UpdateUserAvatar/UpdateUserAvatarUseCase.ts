@@ -33,6 +33,8 @@ class UpdateUserAvatarUseCase {
 
     await this.userRepository.save(user)
 
+    // await this.storageProvider.deleteFile(avatarFilename)
+
     return user
   }
 }

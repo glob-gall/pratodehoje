@@ -38,16 +38,15 @@ class RecipesRepository implements IRecipesRepository {
     return recipe
   }
 
+  public async save(recipe: Recipe): Promise<Recipe> {
+    return this.ormRepository.save(recipe)
+  }
+
   public async findByIngredients(ingredients: Ingredient[]): Promise<Recipe[]> {
     const recipes = await this.ormRepository.find({
       relations: ['ingredients'],
       where: { ingredients },
     })
-    // const recipes = await this.ormRepository
-    //   .createQueryBuilder('recipes')
-    //   .leftJoinAndSelect('recipes.ingredients', 'ingredients')
-    //   .where('recipes.ingredients = :ingredients', { ingredients })
-    //   .getMany()
     return recipes
   }
 

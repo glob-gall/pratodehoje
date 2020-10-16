@@ -9,9 +9,10 @@ import {
   JoinColumn,
   JoinTable,
 } from 'typeorm'
-import { Exclude } from 'class-transformer'
+import { Exclude, Expose } from 'class-transformer'
 import Ingredient from './Ingredient'
 import User from './User'
+import uploadConfig from '../config/upload'
 
 @Entity('recipes')
 class Recipe {
@@ -28,7 +29,21 @@ class Recipe {
   method: string
 
   @Column()
-  image_url: string
+  image_url?: string
+
+  @Expose({ name: 'avatar_url' })
+  getAvatar_url(): string | null {
+    if (!this.image_url) {
+      return null
+    }
+
+    switch (uploadConfig.driver) {
+      case 's3':
+        return `https://${uploadConfig.config.aws.bucket}.s3.amazonaws.com/${this.image_url}`
+      default:
+        return null
+    }
+  }
 
   @ManyToMany(type => Ingredient)
   @JoinTable()

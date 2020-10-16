@@ -17,10 +17,8 @@ class UsersRepository implements IUsersRepository {
   }
 
   public async findAll(userId: string): Promise<User[]> {
-    console.log(userId)
-
     let users: User[]
-    if (userId === '') {
+    if (!userId) {
       users = await this.ormRepository.find({
         relations: ['recipes'],
       })

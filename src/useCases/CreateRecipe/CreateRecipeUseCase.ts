@@ -16,7 +16,6 @@ class CreateRecipeUseCase {
 
   public async execute({
     equipaments,
-    image_url,
     ingredientsNames,
     method,
     name,
@@ -32,13 +31,13 @@ class CreateRecipeUseCase {
 
     const recipe = await this.recipesRepository.create({
       equipaments,
-      image_url,
       ingredients: newIngredients,
       method: methodToString,
       name,
       time,
       user_id,
     })
+
     return recipe
   }
 }
