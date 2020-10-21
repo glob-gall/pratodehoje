@@ -7,6 +7,7 @@ import { findRecipeByIngredientsController } from '../useCases/FindRecipeByIngre
 import { findRecipeByIdController } from '../useCases/FindRecipeById'
 import { updateRecipeAvatarController } from '../useCases/UpdateRecipeAvatar'
 import ensureAuthenticated from '../middlewares/ensureAuthenticated'
+import { editRecipeController } from '../useCases/EditRecipe'
 
 import uploadConfig from '../config/upload'
 
@@ -15,6 +16,7 @@ const upload = multer(uploadConfig.multer)
 const recipesRoutes = Router()
 
 recipesRoutes.post('/', ensureAuthenticated, createRecipeController.execute)
+recipesRoutes.put('/', ensureAuthenticated, editRecipeController.execute)
 recipesRoutes.get('/', findAllRecipesController.execute)
 recipesRoutes.post('/ingredients', findRecipeByIngredientsController.execute)
 recipesRoutes.delete('/:id', deleteRecipeController.execute)
